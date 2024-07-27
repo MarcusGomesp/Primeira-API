@@ -1,38 +1,34 @@
-﻿using APICatalogo.Validations;
-using MessagePack;
-using System.ComponentModel.DataAnnotations;
+﻿using APICatalogo.Models;
+using APICatalogo.Validations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace APICatalogo.Models
+namespace APICatalogo.DTOs
 {
-    [Table("Produtos")]
-    public class Produto
+    public class ProdutoDTO
     {
-        [Key]
+
+
         public int ProdutoId { get; set; }
 
-        [Required(ErrorMessage ="o Nome é Obrigatorio")]
+        [Required(ErrorMessage = "o Nome é Obrigatorio")]
         [StringLength(80)]
         [PrimeiraLetraMaiuscula]
         public string? Nome { get; set; }
         [Required]
         [StringLength(300)]
         public string? Descricao { get; set; }
-        
+
         [Required]
-        [Column(TypeName = "decimal(10,2)")]
         public decimal Preco { get; set; }
-        
+
         [Required]
         [StringLength(300)]
         public string? ImagemUrl { get; set; }
 
-        public float Estoque { get; set; }
-        public DateTime DataCadastro { get; set; }
+
         public int CategoriaId { get; set; }
-        [JsonIgnore]
-        public Categoria? Categoria { get; set; }
+
     }
 }
-

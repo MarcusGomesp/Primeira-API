@@ -1,4 +1,6 @@
 using APICatalogo.Context;
+using APICatalogo.DTOs;
+using APICatalogo.DTOs.Mappings;
 using APICatalogo.Extensions;
 using APICatalogo.Filters;
 using APICatalogo.Logging;
@@ -39,11 +41,15 @@ builder.Services.AddScoped<ApiLogginFilter>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>(); //contrato 
 builder.Services.AddScoped<IProdutoRepository, ProdutosRepository>(); //contrato 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(); 
 
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
 {
     Level = LogLevel.Information
 }));
+
+builder.Services.AddAutoMapper(typeof(ProdutoDTOMappingProfile));
+
 
 
 
